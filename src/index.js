@@ -38,7 +38,7 @@ app.get('/api/drive/create/:id', require('./routes/drive/createVideo'))
 app.get('/api/drive/get/:id', require('./routes/drive/getVideo'))
 app.use('/api/stat', require('./routes/stat'))
 
-app.use('/static', express.static(__dirname + '/static'))
+app.use('/static', express.static('static'))
 
 const limiter = rateLimit({
     windowMs: 30 * 60 * 1000, // 15 minutes

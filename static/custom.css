@@ -7,15 +7,15 @@
 /*
 RGBA em idle.
  */
-.jwplayer.jw-skin-animevsub.jw-state-idle .jw-controls,
-.jwplayer.jw-skin-animevsub.jw-state-complete .jw-controls{
+.jwplayer.jw-skin-custom.jw-state-idle .jw-controls,
+.jwplayer.jw-skin-custom.jw-state-complete .jw-controls{
 	background: rgba(0, 0, 0, .7);
 }
 
 /*
 Botão play em idle.
  */
-.jwplayer.jw-skin-animevsub.jw-state-idle .jw-display-controls .jw-display-icon-container {
+.jwplayer.jw-skin-custom.jw-state-idle .jw-display-controls .jw-display-icon-container {
 	font-family: 'Alata', sans-serif;
 	color: var(--bg-red);
 	background: none;
@@ -30,14 +30,14 @@ Botão play em idle.
 	-webkit-animation-direction: alternate;
 }
 
-.jwplayer.jw-skin-animevsub.jw-state-idle .jw-display-controls .jw-display-icon-container .jw-icon {
+.jwplayer.jw-skin-custom.jw-state-idle .jw-display-controls .jw-display-icon-container .jw-icon {
 	color: #1e1e1e;
 	width: 60px;
 	height: 60px;
 	padding: 20px;
 }
 
-.jwplayer.jw-skin-animevsub.jw-state-idle .jw-display-controls .jw-display-icon-container {
+.jwplayer.jw-skin-custom.jw-state-idle .jw-display-controls .jw-display-icon-container {
 	margin-bottom: -2.5rem;
 	background-color: rgba(0, 0, 0, .4);
 	border: solid 0.125rem var(--bg-white);
@@ -45,157 +45,157 @@ Botão play em idle.
 	width: 75px;
 }
 
-.jwplayer.jw-skin-animevsub.jw-state-idle:hover .jw-display-controls .jw-display-icon-container {
+.jwplayer.jw-skin-custom.jw-state-idle:hover .jw-display-controls .jw-display-icon-container {
 	background-color: rgba(0, 0, 0, .5);
 }
 
-.jwplayer.jw-skin-animevsub.jw-state-idle .jw-display-controls .jw-display-icon-container .jw-icon {
+.jwplayer.jw-skin-custom.jw-state-idle .jw-display-controls .jw-display-icon-container .jw-icon {
 	color: var(--bg-red);
 	height: 50px;
 	width: 50px;
 	padding: 12px;
 }
 
-.jwplayer.jw-skin-animevsub.jw-state-idle .jw-display-controls .jw-display-icon-container:hover {
+.jwplayer.jw-skin-custom.jw-state-idle .jw-display-controls .jw-display-icon-container:hover {
 	background-color: rgba(0, 0, 0, .4);
 }
 
-.jwplayer.jw-skin-animevsub.jw-state-idle .jw-display-controls .jw-display-icon-container .jw-icon:hover {
+.jwplayer.jw-skin-custom.jw-state-idle .jw-display-controls .jw-display-icon-container .jw-icon:hover {
 	color: var(--bg-red);
 }
 
 /*
 Posição do play em idle.
 */
-.jwplayer.jw-skin-animevsub.jw-state-idle .jw-display {
+.jwplayer.jw-skin-custom.jw-state-idle .jw-display {
 	height: 50%;
 }
 
-.jwplayer.jw-skin-animevsub.jw-state-idle .jw-display-container {
+.jwplayer.jw-skin-custom.jw-state-idle .jw-display-container {
 	vertical-align: bottom;
 }
 
-.jwplayer.jw-skin-animevsub .jw-display-controls .jw-display-icon-container .jw-icon:hover {
+.jwplayer.jw-skin-custom .jw-display-controls .jw-display-icon-container .jw-icon:hover {
 	color: var(--bg-red);
 }
 
-.jwplayer.jw-skin-animevsub.jw-state-paused .jw-controls {
+.jwplayer.jw-skin-custom.jw-state-paused .jw-controls {
 	background-color: rgba(0, 0, 0, .1);
 }
 
 /*
 Amplia a imagem e adiciona transições.
 */
-.jwplayer.jw-skin-animevsub .jw-preview {
+.jwplayer.jw-skin-custom .jw-preview {
 	width: calc(100% + 50px);
 	background-size: calc(100% + 60px);
 	transition: opacity 0.35s, transform 0.35s;
 	transform: translate3d(-40px, 0, 0);
 }
 
-.jwplayer.jw-skin-animevsub:hover .jw-preview {
+.jwplayer.jw-skin-custom:hover .jw-preview {
 	transform: translate3d(0, 0, 0);
 }
 
 /*
 Deslizar a imagem em -40px.
 */
-.jwplayer.jw-skin-animevsub.jw-state-complete:hover .jw-preview {
+.jwplayer.jw-skin-custom.jw-state-complete:hover .jw-preview {
 	transform: translate3d(-40px, 0, 0);
 }
 
 /*
 Mudar a cor da barra de controle e alterar a cor do ícone em idle.
 */
-.jwplayer.jw-skin-animevsub .jw-display {
+.jwplayer.jw-skin-custom .jw-display {
 	padding-bottom: 45px;
 }
 
-.jwplayer.jw-skin-animevsub .jw-controls::after {
+.jwplayer.jw-skin-custom .jw-controls::after {
 	background: none;
 }
 
-.jwplayer.jw-skin-animevsub .jw-controlbar {
+.jwplayer.jw-skin-custom .jw-controlbar {
 
 }
 
-.jwplayer.jw-skin-animevsub .jw-controlbar .jw-button-container .jw-button-color {
+.jwplayer.jw-skin-custom .jw-controlbar .jw-button-container .jw-button-color {
 	color: var(--bg-white);
 }
 
-.jwplayer.jw-skin-animevsub.jw-state-paused .jw-controlbar .jw-button-container .jw-button-color {
+.jwplayer.jw-skin-custom.jw-state-paused .jw-controlbar .jw-button-container .jw-button-color {
 	color: var(--bg-white);
 }
 
-.jwplayer.jw-skin-animevsub .jw-controlbar .jw-button-container .jw-button-color:hover {
+.jwplayer.jw-skin-custom .jw-controlbar .jw-button-container .jw-button-color:hover {
 	color: var(--bg-red);;
 }
 
 /*
 Toltips mais perto da barra, alterar cores e remover sombras.
 */
-.jwplayer.jw-skin-animevsub .jw-controlbar .jw-tooltip {
+.jwplayer.jw-skin-custom .jw-controlbar .jw-tooltip {
 	bottom: 90%;
 	box-shadow: none!important;
 }
 
-.jwplayer.jw-skin-animevsub .jw-controlbar .jw-tooltip.jw-open {
+.jwplayer.jw-skin-custom .jw-controlbar .jw-tooltip.jw-open {
 	border-radius: 3px;
 	color: var(--bg-black);
 }
 
-.jwplayer.jw-skin-animevsub .jw-controlbar .jw-tooltip .jw-text {
+.jwplayer.jw-skin-custom .jw-controlbar .jw-tooltip .jw-text {
 	background-color: VAR(--bg-black);
 	border-radius: 3px;
 	border: 0;
 }
 
-.jwplayer.jw-skin-animevsub .jw-controlbar .jw-text {
+.jwplayer.jw-skin-custom .jw-controlbar .jw-text {
 	color: var(--bg-white);
 }
 
-.jwplayer.jw-skin-animevsub .jw-time-tip .jw-text{
+.jwplayer.jw-skin-custom .jw-time-tip .jw-text{
 	color: var(--bg-black);
 }
 
-.jwplayer.jw-skin-animevsub .jw-volume-tip {
+.jwplayer.jw-skin-custom .jw-volume-tip {
 	margin-bottom: -40px;
 }
 
 /*
 Tooltip timeslider e botões de qualidade e legenda.
 */
-.jwplayer.jw-skin-animevsub .jw-settings-topbar-buttons .jw-tooltip-captions, 
-.jwplayer.jw-skin-animevsub .jw-settings-topbar-buttons .jw-tooltip-quality {
+.jwplayer.jw-skin-custom .jw-settings-topbar-buttons .jw-tooltip-captions, 
+.jwplayer.jw-skin-custom .jw-settings-topbar-buttons .jw-tooltip-quality {
 	color: var(--bg-black);
 }
 
-.jwplayer.jw-skin-animevsub .jw-settings-topbar-buttons .jw-tooltip-captions .jw-text,
-.jwplayer.jw-skin-animevsub .jw-settings-topbar-buttons .jw-tooltip-quality .jw-text,
-.jwplayer.jw-skin-animevsub .jw-time-tip .jw-reset {
+.jwplayer.jw-skin-custom .jw-settings-topbar-buttons .jw-tooltip-captions .jw-text,
+.jwplayer.jw-skin-custom .jw-settings-topbar-buttons .jw-tooltip-quality .jw-text,
+.jwplayer.jw-skin-custom .jw-time-tip .jw-reset {
 	border-radius: 3px;
 	background-color: var(--bg-black);
 	color: var(--bg-white);
 }
 
-.jwplayer.jw-skin-animevsub .jw-time-tip {
+.jwplayer.jw-skin-custom .jw-time-tip {
 	color: var(--bg-black);
 }
 
 /*
 Controle de volume.
 */
-.jwplayer.jw-skin-animevsub .jw-overlay .jw-slider-volume .jw-slider-container .jw-knob {
+.jwplayer.jw-skin-custom .jw-overlay .jw-slider-volume .jw-slider-container .jw-knob {
 	background-color: var(--bg-red);
 }
 
-.jwplayer.jw-skin-animevsub .jw-overlay .jw-slider-volume .jw-slider-container .jw-buffer,
-.jwplayer.jw-skin-animevsub .jw-overlay .jw-slider-volume .jw-slider-container .jw-rail {
+.jwplayer.jw-skin-custom .jw-overlay .jw-slider-volume .jw-slider-container .jw-buffer,
+.jwplayer.jw-skin-custom .jw-overlay .jw-slider-volume .jw-slider-container .jw-rail {
 	background-color: var(--bg-black);
 	width: 0.2rem;
 }
 
-.jwplayer.jw-skin-animevsub .jw-overlay .jw-slider-volume .jw-slider-container .jw-progress{
+.jwplayer.jw-skin-custom .jw-overlay .jw-slider-volume .jw-slider-container .jw-progress{
 	background-color: var(--bg-red);
 	width: 0.2rem;
 }
@@ -203,44 +203,44 @@ Controle de volume.
 /*
 Tamanho e cor da slider.
 */
-.jwplayer.jw-skin-animevsub .jw-controlbar .jw-slider-time .jw-slider-container .jw-rail {
+.jwplayer.jw-skin-custom .jw-controlbar .jw-slider-time .jw-slider-container .jw-rail {
 	background-color: var(--bg-black);
 }
-.jwplayer.jw-skin-animevsub .jw-controlbar .jw-slider-time .jw-slider-container .jw-buffer {
+.jwplayer.jw-skin-custom .jw-controlbar .jw-slider-time .jw-slider-container .jw-buffer {
 	background-color: #404040;
 }
 
-.jwplayer.jw-skin-animevsub .jw-controlbar .jw-slider-time .jw-slider-container .jw-knob,
-.jwplayer.jw-skin-animevsub .jw-controlbar .jw-slider-time .jw-slider-container .jw-progress {
+.jwplayer.jw-skin-custom .jw-controlbar .jw-slider-time .jw-slider-container .jw-knob,
+.jwplayer.jw-skin-custom .jw-controlbar .jw-slider-time .jw-slider-container .jw-progress {
 	background-color: var(--bg-red);
 }
 
-.jw-skin-animevsub .jw-slider-horizontal .jw-rail,
-.jw-skin-animevsub .jw-slider-horizontal .jw-buffer,
-.jw-skin-animevsub .jw-slider-horizontal .jw-progress {
+.jw-skin-custom .jw-slider-horizontal .jw-rail,
+.jw-skin-custom .jw-slider-horizontal .jw-buffer,
+.jw-skin-custom .jw-slider-horizontal .jw-progress {
 	height: 0.3rem;
 }
 
 /*
 Cor do menu de configurações.
 */
-.jwplayer.jw-skin-animevsub .jw-settings-menu {
+.jwplayer.jw-skin-custom .jw-settings-menu {
 	background-color: var(--bg-black);
 	border-radius: 3px;
 	max-width: 10rem;
 	max-height: 15rem;
 }
 
-.jwplayer.jw-skin-animevsub .jw-settings-menu .jw-settings-topbar .jw-icon:hover {
+.jwplayer.jw-skin-custom .jw-settings-menu .jw-settings-topbar .jw-icon:hover {
 	color: var(--bg-red);
 }
 
-.jwplayer.jw-skin-animevsub .jw-settings-menu .jw-settings-content-item:hover,
-.jwplayer.jw-skin-animevsub .jw-settings-menu .jw-settings-item-active {
+.jwplayer.jw-skin-custom .jw-settings-menu .jw-settings-content-item:hover,
+.jwplayer.jw-skin-custom .jw-settings-menu .jw-settings-item-active {
 	color: var(--bg-red);
 }
 
-.jwplayer.jw-skin-animevsub .jw-settings-menu .jw-settings-item-active::before {
+.jwplayer.jw-skin-custom .jw-settings-menu .jw-settings-item-active::before {
 	
 }
 
@@ -252,20 +252,20 @@ Cor do menu de configurações.
 	color: var(--bg-white);
 }
 
-.jwplayer.jw-skin-animevsub .jw-settings-menu .jw-submenu-topbar {
+.jwplayer.jw-skin-custom .jw-settings-menu .jw-submenu-topbar {
 	display: none;
 }
 
 /*
 Player responsivo jw8.
 */
-.jwplayer.jw-skin-animevsub.jw-breakpoint-6 .jw-volume-tip,
-.jwplayer.jw-skin-animevsub.jw-breakpoint-5 .jw-volume-tip,
-.jwplayer.jw-skin-animevsub.jw-breakpoint-4 .jw-volume-tip,
-.jwplayer.jw-skin-animevsub.jw-breakpoint-3 .jw-volume-tip,
-.jwplayer.jw-skin-animevsub.jw-breakpoint-2 .jw-volume-tip,
-.jwplayer.jw-skin-animevsub.jw-breakpoint-1 .jw-volume-tip,
-.jwplayer.jw-skin-animevsub.jw-breakpoint-0 .jw-volume-tip {
+.jwplayer.jw-skin-custom.jw-breakpoint-6 .jw-volume-tip,
+.jwplayer.jw-skin-custom.jw-breakpoint-5 .jw-volume-tip,
+.jwplayer.jw-skin-custom.jw-breakpoint-4 .jw-volume-tip,
+.jwplayer.jw-skin-custom.jw-breakpoint-3 .jw-volume-tip,
+.jwplayer.jw-skin-custom.jw-breakpoint-2 .jw-volume-tip,
+.jwplayer.jw-skin-custom.jw-breakpoint-1 .jw-volume-tip,
+.jwplayer.jw-skin-custom.jw-breakpoint-0 .jw-volume-tip {
 	margin-bottom: -20px;
 }
 

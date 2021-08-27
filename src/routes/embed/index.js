@@ -1,5 +1,5 @@
 
 
 module.exports = (req,res) => {
-    res.render(__dirname+'/embed',{id:req.params.id})
+    res.render('embed',{id:req.params.id})
 }
