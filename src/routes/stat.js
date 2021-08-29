@@ -2,6 +2,7 @@ const videoSchema = require('../models/video')
 const express = require('express')
 const router = express.Router()
 const levelClient = require('../level')
+
 router.get('/clear-cache', async (req, res) => {
     try {
         await levelClient.clear()

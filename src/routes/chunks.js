@@ -17,12 +17,10 @@ module.exports = async (req, res) => {
         try {
             data = await levelClient.get(req.params.url)
             proxy_url = data
-            res.setHeader('X-LEVEL-HIT', 'true')
             res.setHeader('max-age', '2629743')
         }
         catch (err) {
             if (err.message.includes('Key not found in database ')) {
-                res.setHeader('X-LEVEL-HIT', 'false')
                 const url = decodeUrl(req.params.url)
                 proxy_url = await imageProxy(url)
                 await levelClient.put(req.params.url, proxy_url)

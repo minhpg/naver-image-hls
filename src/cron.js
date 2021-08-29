@@ -1,5 +1,5 @@
 const CronJob = require('cron').CronJob;
-const sendMessage = require('./telegram-api/sendMessage')
+const {sendMessage} = require('./telegram-api/sendMessage')
 const imageProxy = require('./google-drive-api/imageProxyV3')
 require('dotenv').config()
 

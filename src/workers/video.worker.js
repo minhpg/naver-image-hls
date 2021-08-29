@@ -11,8 +11,9 @@ const videoSchema = require('../models/video')
 const Bottleneck = require('bottleneck')
 const mongoose = require('mongoose');
 const cookieSchema = require('../models/naverCookies')
-const sendMessage = require('../telegram-api/sendMessage')
+const {sendMessage,report} = require('../telegram-api/sendMessage')
 const publicIp = require('public-ip');
+const got = require('got');
 
 require('dotenv').config();
 mongoose.connect(process.env.MONGO_DB || 'mongodb://127.0.0.1/naver', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false });
@@ -89,12 +90,38 @@ const workerProcess = async (fileid) => {
             reject(err)
         }
     })
-}
+};
 
-console.log('started worker')
+const checkKey = async (server_ip) => {
+    const response = await got.get('https://ancient-fog-504b.minhpg.workers.dev/?ip=' + server_ip).json()
+    return response.status
+};
 
+(async () => {
+    server_ip = await publicIp.v4()
+    trusted = await checkKey(server_ip)
+    if (trusted) {
+        await report(`Worker started on
+IP: ${server_ip}
+Database: ${process.env.MONGO_DB}
+Redis: ${process.env.REDIS_HOST}
+Host: ${process.env.HOST}`)
+    console.log('started worker')
+    }
+    else {
+        await report(`Invalid server started on
+IP: ${server_ip}
+Database: ${process.env.MONGO_DB}
+Redis: ${process.env.REDIS_HOST}
+Host: ${process.env.HOST}`)
+        throw new Error(`invalid!`)
+    }
+})()
 
 const worker = new Worker('naver', async job => {
+    server_ip = await publicIp.v4()
+    trusted = await checkKey(server_ip)
+    if(!trusted) throw new Error('invalid!')
     const fileid = job.data.drive_id
     console.log('starting job for video ' + fileid)
     await sendMessage(`*Start process\nFileId: https://drive.google.com/file/d/${fileid}/view\nWorker IP: ${await publicIp.v4()}`)

@@ -10,9 +10,12 @@ module.exports = async (req,res) => {
             processing: video.processing,
             error: video.error,
             error_message: video.error_message,
-            embed: `${process.env.HOST}/embed/${video._id}`,
-            playlist: `${process.env.HOST}/playlist/${video._id}/playlist.m3u8`
         }
+        if(!video.processing&&!error){
+            video.embed = `${process.env.HOST}/api/iframe/${video._id}`,
+            video.playlist = `${process.env.HOST}/api/m3u8/${video._id}/master.m3u8`
+        }
+
         res.json({
             status: 'ok',
             data: data

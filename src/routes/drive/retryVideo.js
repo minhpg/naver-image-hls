@@ -4,7 +4,6 @@ const videoQueue = require('../../queues/video.queue')
 module.exports = async (req, res) => {
     const fileId = req.params.id
     const video_in_db = await videoSchema.findOne({ drive_id: fileId }).exec()
-    console.log(video_in_db)
     if (!video_in_db) {
         res.json({
             status: 'failed',

@@ -48,7 +48,7 @@ module.exports = (req, res) => {
             const promises = file.segments.map((segment,index) => {
                 return new Promise((resolve, reject) =>{
                     encoded_url = encodeUrl(segment.drive)
-                    resolve(`${process.env.PROXY_DOMAIN || process.env.HOST}/chunks/${file._id}/${file.res}/${encoded_url}/${segment.filename.replace('.ts','.png')}`) 
+                    resolve(`${process.env.PROXY_DOMAIN || process.env.HOST}/api/hls/${encoded_url}`) 
                 })
             })
             await Promise.all(promises).then(segments => {

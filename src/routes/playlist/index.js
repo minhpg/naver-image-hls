@@ -8,7 +8,6 @@ router.use((req, res, next) => {
     next()
   })
 
-router.get('/:id/playlist.m3u8',require('./quality')) 
-router.get('/:id/master.m3u8',require('./master'))
+router.get('/:id/master.m3u8',require('./quality')) 
 
 module.exports = router
