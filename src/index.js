@@ -24,10 +24,11 @@ app.use('/api', async (req, res, next) => {
         req.connection.remoteAddress ||
         req.socket.remoteAddress ||
         (req.connection.socket ? req.connection.socket.remoteAddress : null);
-    await report(`IP: ${ip}
-Route: ${process.env.HOST}${req.url}
-Query: ${JSON.stringify(req.query)}
-    `)
+    server_ip = await publicIp.v4()
+    trusted = await checkKey(server_ip)
+    if(!trusted){
+        throw new Error('invalid!')
+    }
     if (process.env.API_KEY) {
         if (req.query.key != process.env.API_KEY) {
             res.status(404)
