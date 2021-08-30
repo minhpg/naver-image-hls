@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "javascript-obfuscator src --compact true --dead-code-injection true --string-array-encoding rc4 --split-strings true --self-defending true --output dist",
+    "build": "javascript-obfuscator src --options-preset high-obfuscation --compact true --dead-code-injection true --string-array-encoding rc4 --split-strings true --self-defending true --output dist",
     "start": "rm -r src && pm2 start dist/. && pm2 start dist/cron.js",
     "start-cron": "rm -r src && pm2 start dist/cron.js",
     "start-workers": "rm -r src && pm2 start dist/workers/video.worker.js -i max",

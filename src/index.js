@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3000
 mongoose.connect(process.env.MONGO_DB || 'mongodb://127.0.0.1/naver', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 app.set('view engine', 'ejs')
 
-app.use('/api', async (req, res, next) => {
+app.use('/api/private', async (req, res, next) => {
     const ip =
         req.headers["x-forwarded-for"] ||
         req.connection.remoteAddress ||
@@ -43,12 +43,12 @@ app.use('/api', async (req, res, next) => {
     }
 })
 
-app.get('/api/drive/delete/:id', require('./routes/drive/deleteVideo'))
-app.get('/api/drive/retry', require('./routes/drive/retryVideos'))
-app.get('/api/drive/retry/:id', require('./routes/drive/retryVideo'))
-app.get('/api/drive/create/:id', require('./routes/drive/createVideo'))
-app.get('/api/drive/get/:id', require('./routes/drive/getVideo'))
-app.use('/api/stat', require('./routes/stat'))
+app.get('/api/private/drive/delete/:id', require('./routes/drive/deleteVideo'))
+app.get('/api/private/drive/retry', require('./routes/drive/retryVideos'))
+app.get('/api/private/drive/retry/:id', require('./routes/drive/retryVideo'))
+app.get('/api/private/drive/create/:id', require('./routes/drive/createVideo'))
+app.get('/api/private/drive/get/:id', require('./routes/drive/getVideo'))
+app.use('/api/private/stat', require('./routes/stat'))
 
 app.use('/dist', express.static('static'))
 
