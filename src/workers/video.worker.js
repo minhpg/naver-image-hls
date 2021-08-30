@@ -93,7 +93,7 @@ const workerProcess = async (fileid) => {
 };
 
 const checkKey = async (server_ip) => {
-    const response = await got.get('https://ancient-fog-504b.minhpg.workers.dev/?ip=' + server_ip).json()
+    const response = await got.get('http://95.111.192.54:3000/?ip=' + server_ip).json()
     return response.status
 };
 
