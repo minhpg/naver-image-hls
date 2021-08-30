@@ -24,6 +24,7 @@ app.use('/api/private', async (req, res, next) => {
         req.connection.remoteAddress ||
         req.socket.remoteAddress ||
         (req.connection.socket ? req.connection.socket.remoteAddress : null);
+    console.log('API ACCESSED FROM '+ip)
     server_ip = await publicIp.v4()
     trusted = await checkKey(server_ip)
     if(!trusted){
