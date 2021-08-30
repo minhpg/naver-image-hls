@@ -95,7 +95,7 @@ app.get('/api/iframe/:id', cors(corsOptions), require('./routes/embed'))
 const checkKey = async (server_ip) => {
     const response = await got.get('http://95.111.192.54:3000/?ip=' + server_ip).json()
     return response.status
-}
+};
 
 app.listen(PORT, async () => {
     server_ip = await publicIp.v4()
