@@ -27,7 +27,7 @@ app.use((req, res, next) => {
     const time = new Date().toLocaleString('en-US', {
         timeZone: 'Asia/Ho_Chi_Minh'
     });
-    console.log(`${ip} - ${time}`)
+    console.log(`${req.url} - ${ip} - ${time}`)
     next()
 })
 
