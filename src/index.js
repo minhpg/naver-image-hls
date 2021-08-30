@@ -69,7 +69,7 @@ app.use('/api/m3u8', limiter,
     }), require('./routes/playlist'))
 
 
-app.get('/api/hls/:id/:url',
+app.get('/api/hls/:url',
     cache.route({
         expire: {
             '200': 1,
