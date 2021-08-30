@@ -1,5 +1,5 @@
 const initPlayer = (link) =>  {
-    let player = jwplayer("jwplayer");
+    let player = jwplayer("play");
     let object = {
         playbackRateControls: true,
         controls: true,
