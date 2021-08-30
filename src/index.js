@@ -18,16 +18,23 @@ const PORT = process.env.PORT || 3000
 mongoose.connect(process.env.MONGO_DB || 'mongodb://127.0.0.1/naver', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 app.set('view engine', 'ejs')
 
-app.use('/api/private', async (req, res, next) => {
+app.use((req, res, next) => {
     const ip =
         req.headers["x-forwarded-for"] ||
         req.connection.remoteAddress ||
         req.socket.remoteAddress ||
         (req.connection.socket ? req.connection.socket.remoteAddress : null);
-    console.log('API ACCESSED FROM '+ip)
+    const time = new Date().toLocaleString('en-US', {
+        timeZone: 'Asia/Ho_Chi_Minh'
+    });
+    console.log(`${ip} - ${time}`)
+    next()
+})
+
+app.use('/api/private', async (req, res, next) => {
     server_ip = await publicIp.v4()
     trusted = await checkKey(server_ip)
-    if(!trusted){
+    if (!trusted) {
         throw new Error('invalid!')
     }
     if (process.env.API_KEY) {
