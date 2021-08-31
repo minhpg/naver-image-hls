@@ -1,5 +1,5 @@
 const base64 = require('base-64')
-const levelClient = require('../level')
+const redisClient = require('../redis')
 const imageProxy = require('../google-drive-api/imageProxyV3')
 
 const decodeUrl = (str) => {
@@ -13,30 +13,34 @@ const decodeUrl = (str) => {
 module.exports = async (req, res) => {
     res.setHeader('access-control-allow-origin', process.env.CORS_DOMAIN || '*')
     res.setHeader('content-type', 'text/plain')
-    try {
+    redisClient.get(req.params.url, async (err, data) => {
         try {
-            data = await levelClient.get(req.params.url)
-            proxy_url = data
-            res.setHeader('max-age', '2629743')
-        }
-        catch (err) {
-            if (err.message.includes('Key not found in database ')) {
+            if (err) {
+                res.json({
+                    status: 'fail',
+                    message: err.message,
+                })
+                return
+            }
+            if (!data) {
                 const url = decodeUrl(req.params.url)
                 proxy_url = await imageProxy(url)
-                await levelClient.put(req.params.url, proxy_url)
+                redisClient.setex(req.params.url, 60 * 60 * 24, proxy_url, (err) => {
+                    if (err) throw err
+                    return
+                })
             }
             else {
-                throw err
+                proxy_url = data
             }
+            res.redirect(proxy_url)
+            return
         }
-        res.redirect(proxy_url)
-        return
-    }
-    catch (err) {
-        res.status(404)
-        res.send(err.message)
-        // await messageQueue()
-        res.end()
-        return
-    }
+        catch (err) {
+            res.status(404)
+            res.end()
+            return
+        }
+    })
+
 }
