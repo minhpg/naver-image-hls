@@ -1,6 +1,6 @@
 const base64 = require('base-64')
 const redisClient = require('../redis')
-const imageProxy = require('../google-drive-api/imageProxyV3')
+const imageProxy = require('../google-drive-api/imageProxyV2')
 
 const decodeUrl = (str) => {
     var newString = ""
