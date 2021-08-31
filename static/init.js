@@ -12,6 +12,14 @@ const initPlayer = (link) =>  {
         preload: "auto",
     };
     player.setup(object);
+    if (Hls.isSupported() && p2pml.hlsjs.Engine.isSupported()) {
+        var engine = new p2pml.hlsjs.Engine();
+        jwplayer_hls_provider.attach();
+        p2pml.hlsjs.initJwPlayer(player, {
+            liveSyncDurationCount: 7, // To have at least 7 segments in queue
+            loader: engine.createLoaderClass(),
+        });
+    }
     player.on('ready', () => {
         console.log(player)
     });
