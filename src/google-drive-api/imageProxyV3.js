@@ -5,6 +5,7 @@ module.exports = async (fileid) => {
     try {
         if (fileid.includes('PNG')) {
             proxy_url = `https://post-phinf.pstatic.net${fileid}`
+            proxy_url = proxy_url.replace('.png','.rd')
         }
         else {
             proxy_url = fileid
