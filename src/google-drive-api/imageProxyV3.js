@@ -25,7 +25,6 @@ module.exports = async (fileid) => {
             headers: headers
         });
         const json_data = JSON.parse(response.body.replace(`)]}'`,'').trim())
-        console.log(json_data[0][0])
         raw_url = json_data[0][0][1][0][1]
         final_url = raw_url.split('#')[0].replace('-d-e1-ft','')
         return final_url
