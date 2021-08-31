@@ -78,16 +78,6 @@ app.use('/api/m3u8', limiter,
 
 
 app.get('/api/hls/:url',
-    cache.route({
-        expire: {
-            '200': 1,
-            302: 60 * 60 * 24,
-            '4xx': 10,
-            '5xx': 10,
-            'xxx': 1
-        }
-        , prefix: 'chunks',
-    }),
     require('./routes/chunks'))
 
 const origins = [
