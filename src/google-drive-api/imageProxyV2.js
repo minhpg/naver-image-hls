@@ -32,7 +32,7 @@ module.exports = async (fileid) => {
         })
         const response_raw = await response.text()
         const json_data = JSON.parse(response_raw.replace(`)]}'`,'').trim())
-        return json_data[0][1]
+        return json_data[0][1].replace('googleusercontent','ggpht')
     }
     catch (err) {
         console.log(err)
