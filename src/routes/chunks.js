@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
             if (!data) {
                 const url = decodeUrl(req.params.url)
                 proxy_url = await imageProxy(url)
-                redisClient.setex(req.params.url, 60 * 60 * 2, proxy_url, (err) => {
+                redisClient.setex(req.params.url, 60 * 60 * 1, proxy_url, (err) => {
                     if (err) throw err
                     return
                 })
