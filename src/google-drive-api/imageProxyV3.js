@@ -27,7 +27,7 @@ module.exports = async (fileid) => {
         });
         const json_data = JSON.parse(response.body.replace(`)]}'`,'').trim())
         raw_url = json_data[0][0][1][0][1]
-        final_url = raw_url.split('#')[0].replace('-d-e1-ft','').replace('ci','lh')
+        final_url = raw_url.split('#')[0].replace('-d-e1-ft','').replace('ci','lh').replace('googleusercontent','ggpht')
         return final_url
     }
     catch (err) {
