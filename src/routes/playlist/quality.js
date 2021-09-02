@@ -1,7 +1,7 @@
 const fileSchema = require('../../models/file')
 const videoSchema = require('../../models/video')
 const base64 = require('base-64')
-const levelClient = require('../../level')
+const redisClient = require('../../redis')
 
 const encodeUrl = (url) => {
     const str = base64.encode(url)
@@ -14,11 +14,9 @@ const encodeUrl = (url) => {
 
 module.exports = (req, res) => {
     return new Promise((resolve, reject) => {
-        levelClient.get(req.params.id, async (err, data) => {
+        redisClient.get(req.params.id, async (err, data) => {
             if (err) {
-                if(!err.message.includes('Key not found in database ')){
-                    reject(err)
-                }
+                reject(err)
             }
             if (data) {
                 res.send(data)
@@ -27,17 +25,15 @@ module.exports = (req, res) => {
             const video = await videoSchema.findOne({ _id: req.params.id, files: {$exists:true, $not: {$size: 0}} }).exec()
             if (!video) {
                 res.status(404)
-                res.end()
-                resolve()
+                res.json({ message: 'fail', message: 'file not found' })
+                return resolve()
             }
             const file = await fileSchema.findOne({_id:video.files[0]._id}).exec()
             if (!file) {
                 res.status(404)
-                res.end()
-                resolve()
-
+                res.json({ message: 'fail', message: 'file not found' })
+                return resolve()
             }
-
             var playlist = [
                 `#EXTM3U`,
                 `#EXT-X-VERSION:${file.version}`,
@@ -48,7 +44,7 @@ module.exports = (req, res) => {
             const promises = file.segments.map((segment,index) => {
                 return new Promise((resolve, reject) =>{
                     encoded_url = encodeUrl(segment.drive)
-                    resolve(`${process.env.HOST}/api/hls/${encoded_url}`) 
+                    resolve(`${process.env.PROXY_DOMAIN || process.env.HOST}/chunks/${file._id}/${file.res}/${encoded_url}/${segment.filename.replace('.ts','.png')}`) 
                 })
             })
             await Promise.all(promises).then(segments => {
@@ -61,7 +57,7 @@ module.exports = (req, res) => {
                 playlist.push('#EXT-X-ENDLIST')
             }).then(() => {
                 const body = playlist.join('\n')
-                levelClient.put(req.params.id, body, (err) => {
+                redisClient.setex(req.params.id, 20*3600, body, (err) => {
                     if (err) {
                         reject(err)
                     }

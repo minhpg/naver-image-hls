@@ -8,9 +8,6 @@ const app = express();
 const { report } = require('./telegram-api/sendMessage')
 const publicIp = require('public-ip');
 const got = require('got')
-const cache = require('express-redis-cache')({
-    client: redisClient,
-});
 
 dotenv.config()
 const PORT = process.env.PORT || 3000
@@ -65,16 +62,7 @@ const limiter = rateLimit({
     max: 100 // limit each IP to 100 requests per windowMs
 });
 
-app.use('/api/m3u8', limiter,
-    cache.route({
-        expire: {
-            200: 60 * 60 * 24,
-            '4xx': 10,
-            '5xx': 10,
-            'xxx': 1
-        }
-        , prefix: 'playlist',
-    }), require('./routes/playlist'))
+app.use('/api/m3u8', limiter, require('./routes/playlist'))
 
 
 app.get('/api/hls/:url',
