@@ -7,8 +7,7 @@ const xml2js = require('xml2js')
 const uploadFile = (file,cookie) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const { size } = await fs.promises.stat(file)
-            console.log(`uploading ${file} - ${cookie.name} - ${cookie.username} - size: ${size}`)
+            console.log(`uploading ${file} - ${cookie.name} - ${cookie.username}`)
             const sessionKey = await getSession(cookie)
             const url = `https://ecommerce.upphoto.naver.com/${sessionKey}/simpleUpload/0?userId=${cookie.username}&extractExif=false&extractAnimatedCnt=true&autorotate=true&extractDominantColor=false&type=`
             const headers = {
