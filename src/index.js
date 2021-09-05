@@ -3,7 +3,6 @@ const dotenv = require('dotenv')
 const mongoose = require('mongoose');
 const cors = require('cors')
 const rateLimit = require("express-rate-limit");
-const redisClient = require('./redis')
 const app = express();
 const { report } = require('./telegram-api/sendMessage')
 const publicIp = require('public-ip');
