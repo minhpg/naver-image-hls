@@ -1,18 +1,6 @@
 const videoSchema = require('../models/video')
 const express = require('express')
 const router = express.Router()
-const levelClient = require('../level')
-
-router.get('/clear-cache', async (req, res) => {
-    try {
-        await levelClient.clear()
-        res.json({'status' : 'ok'})
-    }
-    catch(err) {
-        res.json({'status' : 'error','message': err.message})
-    }
-    res.end()
-})
 
 router.get('/videos', async (req,res) => {
     const completed_videos = await videoSchema.countDocuments({processing:false,error:false}).exec()
