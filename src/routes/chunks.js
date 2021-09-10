@@ -12,7 +12,6 @@ const decodeUrl = (str) => {
 
 module.exports = async (req, res) => {
     res.setHeader('access-control-allow-origin', process.env.CORS_DOMAIN || '*')
-    res.setHeader('content-type', 'text/plain')
     redisClient.get(req.params.url, async (err, data) => {
         try {
             if (err) {
