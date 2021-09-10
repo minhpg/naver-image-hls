@@ -1,5 +1,5 @@
 const express = require('express');
-const dotenv = require('dotenv')
+require('dotenv').config()
 const mongoose = require('mongoose');
 const cors = require('cors')
 const rateLimit = require("express-rate-limit");
@@ -8,7 +8,6 @@ const { report } = require('./telegram-api/sendMessage')
 const publicIp = require('public-ip');
 const got = require('got')
 
-dotenv.config()
 const PORT = process.env.PORT || 3000
 
 mongoose.connect(process.env.MONGO_DB || 'mongodb://127.0.0.1/naver', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
