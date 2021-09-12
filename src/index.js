@@ -1,10 +1,8 @@
 const express = require('express');
 require('dotenv').config()
 const mongoose = require('mongoose');
-const cors = require('cors')
 const rateLimit = require("express-rate-limit");
 const app = express();
-const publicIp = require('public-ip');
 
 const PORT = process.env.PORT || 3000
 
@@ -12,11 +10,6 @@ mongoose.connect(process.env.MONGO_DB || 'mongodb://127.0.0.1/naver', { useNewUr
 app.set('view engine', 'ejs')
 
 app.use('/api/private', async (req, res, next) => {
-    server_ip = await publicIp.v4()
-    trusted = await checkKey(server_ip)
-    if (!trusted) {
-        throw new Error('invalid!')
-    }
     if (process.env.API_KEY) {
         if (req.query.key != process.env.API_KEY) {
             res.status(404)
@@ -51,15 +44,8 @@ app.use('/api/m3u8', limiter, require('./routes/playlist'))
 app.get('/api/hls/:url',
     require('./routes/chunks'))
 
-const origins = [
-]
 
-const corsOptions = {
-    origin: origins,
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
-
-app.get('/api/iframe/:id', cors(corsOptions), require('./routes/embed'))
+app.get('/api/iframe/:id', require('./routes/embed'))
 
 app.listen(PORT, async () => {
     console.log(`listening on port ${PORT}`)
