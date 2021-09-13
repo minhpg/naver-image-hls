@@ -12,6 +12,7 @@ const initPlayer = (link) =>  {
         type: "hls",
         preload: "auto",
     };
+    player.setup(object);
     player.addButton("/dist/svg/skip-forward.svg", "Skip OP/ED", function() {
         skip_time = player.getPosition() + 90;
         player.seek(skip_time)
@@ -22,7 +23,6 @@ const initPlayer = (link) =>  {
     player.addButton("/dist/svg/backward.svg", "Tua lại 5s", function() {
         player.seek(player.getPosition() - 5);
     }, "Tua lại 5s");
-    player.setup(object);
     if (Hls.isSupported() && p2pml.hlsjs.Engine.isSupported()) {
         var engine = new p2pml.hlsjs.Engine();
         jwplayer_hls_provider.attach();
