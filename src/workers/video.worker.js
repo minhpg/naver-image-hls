@@ -159,7 +159,7 @@ const worker = new Worker('naver', async job => {
         }).exec()
     }
     return
-}, { concurrency: 5, connection:require('../queue_connection') });
+}, { concurrency: 2, connection:require('../queue_connection') });
 
 worker.on('completed', (job) => {
     console.log(`${job.id} has completed!`);
