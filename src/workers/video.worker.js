@@ -159,11 +159,7 @@ const worker = new Worker('naver', async job => {
         }).exec()
     }
     return
-}, { concurrency: 5, connection: {
-    port: 6379,
-    host: process.env.REDIS_HOST || 'localhost',
-    password: process.env.REDIS_PASSWORD || ''
-} });
+}, { concurrency: 5, connection:require('../queue_connection') });
 
 worker.on('completed', (job) => {
     console.log(`${job.id} has completed!`);
