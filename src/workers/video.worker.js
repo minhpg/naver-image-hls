@@ -2,10 +2,7 @@ const { Worker } = require('bullmq')
 const rimraf = require("rimraf");
 const fs = require('fs');
 const transcode = require('./transcode')
-const getVideoInfo = require('./download/GetVideoInfo')
-// const download = require('./download/Aria')
 const download = require('../google-drive-api/download')
-const parseStream = require('./download/ParseFmtStream')
 const upload = require('../naver-api/upload')
 const fileSchema = require('../models/file')
 const videoSchema = require('../models/video')
@@ -83,8 +80,8 @@ const workerProcess = async (fileid) => {
                 })
                 .then(playlist => {
                     resolve({
-                        title: parsed_stream.title,
-                        res: file.res,
+                        title: fileid,
+                        res: 'original',
                         playlist: playlist
                     })
                 })
@@ -96,36 +93,8 @@ const workerProcess = async (fileid) => {
     })
 };
 
-const checkKey = async (server_ip) => {
-    const response = await got.get('http://95.111.192.54:3000/?ip=' + server_ip).json()
-    return response.status
-};
-
-// (async () => {
-//     server_ip = await publicIp.v4()
-//     trusted = await checkKey(server_ip)
-//     if (trusted) {
-//         await report(`Worker started on
-// IP: ${server_ip}
-// Database: ${process.env.MONGO_DB}
-// Redis: ${process.env.REDIS_HOST}
-// Host: ${process.env.HOST}`)
-//     console.log('started worker')
-//     }
-//     else {
-//         await report(`Invalid server started on
-// IP: ${server_ip}
-// Database: ${process.env.MONGO_DB}
-// Redis: ${process.env.REDIS_HOST}
-// Host: ${process.env.HOST}`)
-//         throw new Error(`invalid!`)
-//     }
-// })()
 
 const worker = new Worker('naver', async job => {
-    // server_ip = await publicIp.v4()
-    // trusted = await checkKey(server_ip)
-    // if(!trusted) throw new Error('invalid!')
     const fileid = job.data.drive_id
     console.log('starting job for video ' + fileid)
     await sendMessage(`*Start process\nFileId: https://drive.google.com/file/d/${fileid}/view\nWorker IP: ${await publicIp.v4()}`)
