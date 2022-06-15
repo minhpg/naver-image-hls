@@ -43,7 +43,7 @@ module.exports = (req, res) => {
             ]
             const promises = file.segments.map((segment,index) => {
                 return new Promise((resolve, reject) =>{
-                    resolve(`https://1gx4v-opensocial.googleusercontent.com/gadgets/proxy?container=xoday&no_expand=1&refresh=2592000&url=http://post-phinf.pstatic.net${segment.drive.replace('video','file').replace('png','txt')}`) 
+                    resolve(`${process.env.HOST}/api/hls/${encoded_url}`) 
                 })
             })
             await Promise.all(promises).then(segments => {
