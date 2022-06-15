@@ -36,6 +36,7 @@ module.exports = async (req, res) => {
             return
         }
         catch (err) {
+            console.log(err)
             res.status(404)
             res.end()
             return
