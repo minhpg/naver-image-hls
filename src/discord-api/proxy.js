@@ -8,7 +8,6 @@ const upload = async (image_url, authorization, channel_id) => {
 
     const headers = {
         authorization: authorization,
-        'Content-Type': `multipart/form-data; boundary=${form._boundary}`,
         'Cache-Control': 'no-cache'
     }
 
