@@ -25,10 +25,11 @@ module.exports = async (req, res) => {
                 const url = decodeUrl(req.params.url)
                 while (!proxy_url) {
                     try {
-                        proxy_url = await imageProxy(url, 'OTE5ODMxODQxMTIzNTAwMDUy.YbbiXw.TUjkhscQIF0s6bIulzcvKYs6QY4', '919832247039848471')
+                        proxy_url = await imageProxy('http://post-phinf.pstatic.net'+url, 'OTE5ODMxODQxMTIzNTAwMDUy.YbbiXw.TUjkhscQIF0s6bIulzcvKYs6QY4', '919832247039848471')
 
                     }
                     catch (err) {
+                        console.log(err)
                         continue
                     }
                 }
