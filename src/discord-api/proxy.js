@@ -27,6 +27,7 @@ const upload = async (image_url, authorization, channel_id) => {
             headers: headers,
         })
         const data = response.data
+        console.log(response.data)
         const embeds = data.embeds
         if(!embeds) throw new Error('proxy failed!')
         else {
