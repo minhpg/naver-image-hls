@@ -1,12 +1,12 @@
 const axios = require('axios')
 const FormData = require('form-data')
 
-const upload = async (url, authorization, channel_id) => {
+const upload = async (image_url, authorization, channel_id) => {
 
     const form = new FormData()
 
     const payload_json = {
-        'content' : url
+        'content' : image_url
     }
 
     form.append('payload_json',JSON.stringify(payload_json))
@@ -20,7 +20,7 @@ const upload = async (url, authorization, channel_id) => {
 
         const response = await axios(
             {method: 'POST',
-            url: url,
+            url,
             data: form,
             headers: headers,
         })
