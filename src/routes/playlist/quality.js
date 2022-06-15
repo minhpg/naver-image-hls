@@ -43,6 +43,7 @@ module.exports = (req, res) => {
             ]
             const promises = file.segments.map((segment,index) => {
                 return new Promise((resolve, reject) =>{
+                    encoded_url = encodeUrl(`http://post-phinf.pstatic.net${segment.drive}`)
                     resolve(`${process.env.HOST}/api/hls/${encoded_url}`) 
                 })
             })
