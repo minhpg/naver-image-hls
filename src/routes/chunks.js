@@ -23,7 +23,15 @@ module.exports = async (req, res) => {
             }
             if (!data) {
                 const url = decodeUrl(req.params.url)
-                proxy_url = await imageProxy(url, 'OTE5ODMxODQxMTIzNTAwMDUy.YbbiXw.TUjkhscQIF0s6bIulzcvKYs6QY4', '919832247039848471')
+                while (!proxy_url) {
+                    try {
+                        proxy_url = await imageProxy(url, 'OTE5ODMxODQxMTIzNTAwMDUy.YbbiXw.TUjkhscQIF0s6bIulzcvKYs6QY4', '919832247039848471')
+
+                    }
+                    catch (err) {
+                        continue
+                    }
+                }
                 redisClient.setex(req.params.url, 60 * 30, proxy_url, (err) => {
                     if (err) throw err
                     return
