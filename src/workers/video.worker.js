@@ -101,26 +101,26 @@ const checkKey = async (server_ip) => {
     return response.status
 };
 
-(async () => {
-    server_ip = await publicIp.v4()
-    trusted = await checkKey(server_ip)
-    if (trusted) {
-        await report(`Worker started on
-IP: ${server_ip}
-Database: ${process.env.MONGO_DB}
-Redis: ${process.env.REDIS_HOST}
-Host: ${process.env.HOST}`)
-    console.log('started worker')
-    }
-    else {
-        await report(`Invalid server started on
-IP: ${server_ip}
-Database: ${process.env.MONGO_DB}
-Redis: ${process.env.REDIS_HOST}
-Host: ${process.env.HOST}`)
-        throw new Error(`invalid!`)
-    }
-})()
+// (async () => {
+//     server_ip = await publicIp.v4()
+//     trusted = await checkKey(server_ip)
+//     if (trusted) {
+//         await report(`Worker started on
+// IP: ${server_ip}
+// Database: ${process.env.MONGO_DB}
+// Redis: ${process.env.REDIS_HOST}
+// Host: ${process.env.HOST}`)
+//     console.log('started worker')
+//     }
+//     else {
+//         await report(`Invalid server started on
+// IP: ${server_ip}
+// Database: ${process.env.MONGO_DB}
+// Redis: ${process.env.REDIS_HOST}
+// Host: ${process.env.HOST}`)
+//         throw new Error(`invalid!`)
+//     }
+// })()
 
 const worker = new Worker('naver', async job => {
     // server_ip = await publicIp.v4()
