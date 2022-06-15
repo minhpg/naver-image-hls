@@ -3,7 +3,8 @@ const rimraf = require("rimraf");
 const fs = require('fs');
 const transcode = require('./transcode')
 const getVideoInfo = require('./download/GetVideoInfo')
-const download = require('./download/Aria')
+// const download = require('./download/Aria')
+const download = require('../google-drive-api/download')
 const parseStream = require('./download/ParseFmtStream')
 const upload = require('../naver-api/upload')
 const fileSchema = require('../models/file')
@@ -14,6 +15,7 @@ const cookieSchema = require('../models/naverCookies')
 const {sendMessage,report} = require('../telegram-api/sendMessage')
 const publicIp = require('public-ip');
 const got = require('got');
+const serviceAccountAuth = require('../google-drive-api/serviceAccountAuth');
 
 require('dotenv').config();
 mongoose.connect(process.env.MONGO_DB || 'mongodb://127.0.0.1/naver', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false });
@@ -31,12 +33,14 @@ const getCookie = async () => {
 const workerProcess = async (fileid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const response = await getVideoInfo(fileid)
-            const cookie = response.headers['set-cookie']
-            cookie.push(process.env.COOKIE)
-            const parsed_stream = parseStream(response.body, cookie, fileid)
-            const file = parsed_stream.streams[0]
-            const video = await download(file)
+            // const response = await getVideoInfo(fileid)
+            // const cookie = response.headers['set-cookie']
+            // cookie.push(process.env.COOKIE)
+            // const parsed_stream = parseStream(response.body, cookie, fileid)
+            // const file = parsed_stream.streams[0]
+            // const video = await download(file)
+            const auth = await serviceAccountAuth()
+            const video = await download(auth, fileid, fileid+'.mp4')
             transcode(video)
                 .then(playlist => {
                     return new Promise(async (resolve, reject) => {
