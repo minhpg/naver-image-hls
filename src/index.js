@@ -14,11 +14,11 @@ mongoose.connect(process.env.MONGO_DB || 'mongodb://127.0.0.1/naver', { useNewUr
 app.set('view engine', 'ejs')
 
 app.use('/api/private', async (req, res, next) => {
-    server_ip = await publicIp.v4()
-    trusted = await checkKey(server_ip)
-    if (!trusted) {
-        throw new Error('invalid!')
-    }
+    // server_ip = await publicIp.v4()
+    // trusted = await checkKey(server_ip)
+    // if (!trusted) {
+    //     throw new Error('invalid!')
+    // }
     if (process.env.API_KEY) {
         if (req.query.key != process.env.API_KEY) {
             res.status(404)
@@ -63,31 +63,31 @@ const corsOptions = {
 
 app.get('/api/iframe/:id', cors(corsOptions), require('./routes/embed'))
 
-const checkKey = async (server_ip) => {
-    const response = await got.get('http://95.111.192.54:3000/?ip=' + server_ip).json()
-    return response.status
-};
+// const checkKey = async (server_ip) => {
+//     const response = await got.get('http://95.111.192.54:3000/?ip=' + server_ip).json()
+//     return response.status
+// };
 
 app.listen(PORT, async () => {
-    server_ip = await publicIp.v4()
-    trusted = await checkKey(server_ip)
-    if (trusted) {
-        await report(`Server started on
-IP: ${server_ip}
-Port: ${PORT}
-Database: ${process.env.MONGO_DB}
-Redis: ${process.env.REDIS_HOST} - ${process.env.REDIS_PASSWORD}
-Host: ${process.env.HOST}
-API Key: ${process.env.API_KEY}`)
-        console.log(`listening on port ${PORT}`)
-    }
-    else {
-        await report(`Invalid server started on
-IP: ${server_ip}
-Port: ${PORT}
-Database: ${process.env.MONGO_DB}
-Redis: ${process.env.REDIS_HOST}
-Host: ${process.env.HOST}`)
-        throw new Error(`invalid!`)
-    }
+//     server_ip = await publicIp.v4()
+//     trusted = await checkKey(server_ip)
+//     if (trusted) {
+//         await report(`Server started on
+// IP: ${server_ip}
+// Port: ${PORT}
+// Database: ${process.env.MONGO_DB}
+// Redis: ${process.env.REDIS_HOST} - ${process.env.REDIS_PASSWORD}
+// Host: ${process.env.HOST}
+// API Key: ${process.env.API_KEY}`)
+//         console.log(`listening on port ${PORT}`)
+//     }
+//     else {
+//         await report(`Invalid server started on
+// IP: ${server_ip}
+// Port: ${PORT}
+// Database: ${process.env.MONGO_DB}
+// Redis: ${process.env.REDIS_HOST}
+// Host: ${process.env.HOST}`)
+//         throw new Error(`invalid!`)
+//     }
 })

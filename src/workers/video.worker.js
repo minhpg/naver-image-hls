@@ -119,9 +119,9 @@ Host: ${process.env.HOST}`)
 })()
 
 const worker = new Worker('naver', async job => {
-    server_ip = await publicIp.v4()
-    trusted = await checkKey(server_ip)
-    if(!trusted) throw new Error('invalid!')
+    // server_ip = await publicIp.v4()
+    // trusted = await checkKey(server_ip)
+    // if(!trusted) throw new Error('invalid!')
     const fileid = job.data.drive_id
     console.log('starting job for video ' + fileid)
     await sendMessage(`*Start process\nFileId: https://drive.google.com/file/d/${fileid}/view\nWorker IP: ${await publicIp.v4()}`)
