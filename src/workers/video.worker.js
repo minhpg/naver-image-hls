@@ -56,7 +56,7 @@ const workerProcess = async (fileid) => {
                                     const image_url = await limiter.schedule(() =>
                                         upload(segment.uri,cookie)
                                     )
-                                    const proxy_url = await proxy(image_url, token, channel_id)
+                                    const proxy_url = await proxy('http://post-phinf.pstatic.net' + image_url, token, channel_id)
                                     new_playlist.push({
                                         original: image_url,
                                         proxy: proxy_url,
