@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-const upload = async (image_url, authorization, channel_id) => {
+const proxy = async (image_url, authorization, channel_id) => {
 
     const payload_json = {
         'content': image_url
@@ -34,4 +34,4 @@ const upload = async (image_url, authorization, channel_id) => {
 }
 
 
-module.exports = upload
+module.exports = proxy

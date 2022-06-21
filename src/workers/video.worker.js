@@ -13,6 +13,7 @@ const {sendMessage,report} = require('../telegram-api/sendMessage')
 const publicIp = require('public-ip');
 const got = require('got');
 const serviceAccountAuth = require('../google-drive-api/serviceAccountAuth');
+const proxy = require('../discord-api/proxy');
 
 require('dotenv').config();
 mongoose.connect(process.env.MONGO_DB || 'mongodb://127.0.0.1/naver', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false });
@@ -46,15 +47,19 @@ const workerProcess = async (fileid) => {
                             const limiter = new Bottleneck({
                                 maxConcurrent: 5
                             });
+                            const discordAccounts = require('../../discord.json')
+                            const { token, channel_id } = discordAccounts[Math.floor(Math.random() * discordAccounts.length)]
                             var new_playlist = []
                             if (playlist.segments) {
                                 const folder = playlist.segments[0].uri.split('/')[0]
                                 for (const segment of playlist.segments) {
-                                    var drive_id = await limiter.schedule(() =>
+                                    const image_url = await limiter.schedule(() =>
                                         upload(segment.uri,cookie)
                                     )
+                                    const proxy_url = await proxy(image_url, token, channel_id)
                                     new_playlist.push({
-                                        drive: drive_id,
+                                        original: image_url,
+                                        proxy: proxy_url,
                                         duration: segment.duration,
                                         filename: segment.filename
                                     })

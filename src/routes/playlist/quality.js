@@ -43,7 +43,7 @@ module.exports = (req, res) => {
             ]
             const promises = file.segments.map((segment,index) => {
                 return new Promise((resolve, reject) =>{
-                    encoded_url = encodeUrl(`${segment.drive}`)
+                    encoded_url = encodeUrl(`${segment.proxy}`)
                     resolve(`${process.env.HOST}/api/hls/${encoded_url}`) 
                 })
             })
