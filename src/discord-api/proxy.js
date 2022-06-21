@@ -23,10 +23,9 @@ const proxy = async (image_url, authorization, channel_id) => {
         const data = response.data
         console.log(response.data)
         const embeds = data.embeds
-        if (!embeds) throw new Error('proxy failed!')
+        if (embeds.length==0) continue //throw new Error('proxy failed!')
         else {
             if (embeds[0].thumbnail) return embeds[0].thumbnail.proxy_url
-
         }
     }
 
